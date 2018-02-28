@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title — wszelkie prawa zastrzeżone. A. Piecyk </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"> PiecykSite </a>
+        <button class="navbar-toggler" aria-expanded="false" aria-controls="navbarColor03" aria-label="Toggle navigation" type="button" data-toggle="collapse" data-target="#navbarColor03">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    @Html.ActionLink("Strona Główna", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Kontakt", "Contact", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Informacje", "About", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Ogłoszenia", "Ads", "Car", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                </li>
+                @if (Request.IsAuthenticated)
+                {
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="download" aria-expanded="false" href="#" data-toggle="dropdown">Bazy <span class="caret"></span></a>
+                    <div class="dropdown-menu" aria-labelledby="download">
+                        @Html.ActionLink("Właściciele", "Index", "UserInfo", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Samochody", "Index", "Car", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Tuning", "Index", "Tuning", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="download" aria-expanded="false" href="#" data-toggle="dropdown">Moje <span class="caret"></span></a>
+                    <div class="dropdown-menu" aria-labelledby="download">
+                        @Html.ActionLink("Samochody", "Index", "Car", new { id = true }, htmlAttributes: new { @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Tuning", "Index", "Tuning", new { id = true }, htmlAttributes: new { @class = "dropdown-item" })
+                    </div>
+                </li>
+                }
+            </ul>
+
+            @Html.Partial("_LoginPartial")
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year — fajna aplikacja na zaliczenie przedmiotu ASP.NET.</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="https://bootswatch.com/_vendor/popper.js/dist/umd/popper.min.js"></script>
+    <script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

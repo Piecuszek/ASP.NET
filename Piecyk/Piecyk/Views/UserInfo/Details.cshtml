@@ -1,0 +1,63 @@
+﻿@model Piecyk.Models.UserInfoModels
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<br />
+<h2>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h2>
+<p>
+    @Html.ActionLink("Powrót do listy", "Index")
+</p>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal"/>
+        <table class="table">
+            <tr>
+                <th width="100dp">
+                    @Html.DisplayNameFor(model => model.PhoneNo) 
+                    <br />
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.PhoneNo)
+                    <br />
+                    @Html.DisplayFor(model => model.Email)
+                </td>
+            </tr>
+            <tr>
+                <th width="100dp">
+                    Samochody
+                </th>
+            </tr>
+        </table>
+        <table class="table">
+           @foreach (var item in Model.Car)
+           {
+            <tr>
+                <td>
+                     @Html.DisplayFor(modelItem => item.Mark)
+                </td>
+                <td>
+                     @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                     @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                     @Html.DisplayFor(modelItem => item.PurchaseDate)
+                </td>
+                <td>
+                     @Html.DisplayFor(modelItem => item.PurchaseAmount)
+                </td>
+                <td>
+                    <p>
+                       @Html.ActionLink("Szczegóły", "../Car/Details", new { id = item.ID })
+                    </p>
+                </td>
+            </tr>
+           }
+        </table>
+    <dl class="dl-horizontal" />
+</div>

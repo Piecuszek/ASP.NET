@@ -1,0 +1,139 @@
+﻿@model Piecyk.Models.CarModels
+@using Piecyk.Models;
+@{
+    ViewBag.Title = "Details";
+}
+<br />
+<h2>Szczegóły samochodu: @Html.DisplayFor(model => model.Name)</h2>
+<p>
+    @Html.ActionLink("Powrót do listy", "Index")
+</p>
+<p>
+@if (Model.UserInfo.Email == User.Identity.Name)
+{
+    @Html.ActionLink("Edycja", "Edit", new { id = Model.ID })
+}
+</p>
+
+
+<div>
+    <hr />
+    <dl class="dl-horizontal"/>
+        <table class="table">
+            <tr>
+                <th width="100dp">
+                    @Html.ActionLink("Właściciel:", "../UserInfo/Details", new { id = Model.UserID })
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.UserInfo.FirstName)
+                    @Html.DisplayFor(model => model.UserInfo.LastName)
+                </td>
+            </tr>
+        </table>
+
+        <p>
+
+            @{
+                String url = Model.Picture;
+            }
+            <img src="@url" height="300" width="500">
+        </p>
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mark)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Year)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VIN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PurchaseAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PurchaseDate)
+                </th>
+                @if (Model.SalesAmount != null)
+                {
+                <th>
+                    @Html.DisplayNameFor(model => model.SalesAmount)
+                </th>
+                }
+           </tr>
+           <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Mark)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Year)
+                </td>
+               <td>
+                   @Html.DisplayFor(model => model.VIN)
+               </td>
+               <td>
+                   @Html.DisplayFor(model => model.PurchaseAmount)
+               </td>
+               <td>
+                   @Html.DisplayFor(model => model.PurchaseDate)
+               </td>
+                @if (Model.SalesAmount != null)
+                {
+                <td>
+                    @Html.DisplayFor(model => model.SalesAmount)
+                </td>
+                }
+           </tr>
+        </table>
+        <br />
+        
+
+        @if (Model.Tuning.Count > 0)
+        {
+        <table class="table">
+            <tr>
+                Dziennik modernizacji
+            </tr>
+            <tr>
+                <th>
+                    Nazwa
+                </th>
+                <th>
+                    Opis
+                </th>
+                <th>
+                    Cena
+                </th>
+            </tr>
+    
+            @foreach (var item in Model.Tuning)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(mitem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(mitem => item.Desc)
+                </td>
+                <td>
+                    @Html.DisplayFor(mitem => item.Amount)
+                </td>
+            </tr>
+            }
+        </table>
+        }
+
+
+    <dl class="dl-horizontal" />
+</div>
+
+
